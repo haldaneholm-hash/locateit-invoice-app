@@ -1,1 +1,46 @@
-body { font-family: Arial, sans-serif; background: #0f172a; color: white; margin: 0; } .container { max-width: 700px; margin: auto; padding: 40px 20px; } .card { background: #1e293b; padding: 20px; border-radius: 16px; display: flex; flex-direction: column; gap: 12px; } input { padding: 12px; border-radius: 10px; border: none; } button { padding: 14px; border: none; border-radius: 10px; background: #2563eb; color: white; font-weight: bold; }
+
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  background: #0f172a;
+  color: white;
+}
+
+.app {
+  max-width: 900px;
+  margin: auto;
+  padding: 20px;
+}
+
+.card {
+  background: #1e293b;
+  padding: 20px;
+  border-radius: 16px;
+  margin-bottom: 20px;
+}
+
+input {
+  width: 100%;
+  padding: 14px;
+  margin-bottom: 12px;
+  border-radius: 10px;
+  border: none;
+  box-sizing: border-box;
+}
+
+button {
+  padding: 14px;
+  border-radius: 10px;
+  border: none;
+  background: #2563eb;
+  color: white;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.invoice {
+  background: #334155;
+  padding: 12px;
+  border-radius: 10px;
+  margin-top: 10px;
+}
