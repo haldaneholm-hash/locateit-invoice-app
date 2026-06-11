@@ -425,7 +425,14 @@ const filteredHistory = history.filter(
    logo.src = "/logo.png";
 
 logo.onload = () => {
-
+pdf.addImage(
+  logo,
+  "PNG",
+  20,
+  10,
+  25,
+  25
+);
   
   pdf.setFontSize(25);
 pdf.text(
@@ -519,10 +526,10 @@ pdf.text(
 
 y += 25;
 
-if (y > 180) {
-  pdf.addPage();
-  y = 20;
-}
+//if (y > 180) {
+  //pdf.addPage();
+  //y = 20;
+//}
 
 pdf.setFontSize(12);
 pdf.text(
@@ -558,7 +565,11 @@ y += 10;
 pdf.text("Non VAT Vendor", 20, y);
 
 y += 15;
-df.setFontSize(10);
+if (y > 200) {
+  pdf.addPage();
+  y = 20;
+}
+pdf.setFontSize(10);
 
 pdf.text("Terms & Conditions", 20, y);
 
@@ -604,7 +615,7 @@ pdf.text(
 
 y += 15;
 pdf.text("Thank you for your business.", 20, y);
-pdf.addImage(logo, "PNG", 20, 10, 25, 25);
+
 
   pdf.save(`${invoiceNumber}.pdf`);
   };
