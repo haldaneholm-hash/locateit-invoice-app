@@ -8,6 +8,7 @@
     "build": "vite build"
   },
   "dependencies": {
+    "@supabase/supabase-js": "^2.108.1",
     "firebase": "^11.0.0",
     "jspdf": "^2.5.2",
     "jspdf-autotable": "^5.0.8",
