@@ -1,7 +1,10 @@
 import { useState, useEffect } from "react";
 import jsPDF from "jspdf";
-
+import autoTable from "jspdf-autotable";
 import * as XLSX from "xlsx";
+
+
+
 
 export default function App() {
   const [client, setClient] = useState("");
@@ -455,7 +458,7 @@ pdf.text(`Date: ${today}`, 145, 45);
 pdf.setFontSize(10);
 
 pdf.text(
-  "DSTV Installations & Technical Solutions",
+  settings.companyName,
   20,
   42
 );
@@ -489,26 +492,20 @@ pdf.line(20, 130, 190, 130);
 
 pdf.text("Invoice Items", 20, 140);
 
-let y = 155;
-
-pdf.setFontSize(12);
-pdf.text("Description", 20, y);
-pdf.text("Qty", 110, y);
-pdf.text("Rate", 140, y);
-pdf.text("Total", 170, y);
-
-y += 10;
-
-items.forEach((item) => {
-  pdf.text(item.description, 20, y);
-  pdf.text(String(item.qty), 110, y);
-  pdf.text(`R ${item.rate}`, 140, y);
-  pdf.text(`R ${item.qty * item.rate}`, 170, y);
-
-  y += 10;
+autoTable(pdf, {
+  startY: 145,
+  head: [["Description", "Qty", "Rate", "Total"]],
+  body: items.map((item) => [
+    item.description,
+    item.qty,
+    `R ${item.rate}`,
+    `R ${(item.qty * item.rate).toFixed(2)}`
+  ]),
 });
 
-  y += 10;
+let y = pdf.lastAutoTable.finalY + 15;
+
+
 
 pdf.setFillColor(230, 230, 230);
 pdf.rect(20, y, 170, 15, "F");
@@ -522,6 +519,10 @@ pdf.text(
 
 y += 25;
 
+if (y > 180) {
+  pdf.addPage();
+  y = 20;
+}
 
 pdf.setFontSize(12);
 pdf.text(
@@ -556,7 +557,52 @@ pdf.text(
 y += 10;
 pdf.text("Non VAT Vendor", 20, y);
 
-y += 20;
+y += 15;
+df.setFontSize(10);
+
+pdf.text("Terms & Conditions", 20, y);
+
+y += 8;
+
+pdf.text(
+  "• Payment due within 24 hours of invoice date.",
+  20,
+  y
+);
+
+y += 6;
+
+pdf.text(
+  "• COD applies where specified.",
+  20,
+  y
+);
+
+y += 6;
+
+pdf.text(
+  "• Ownership remains with LocateIT Solutions until paid in full.",
+  20,
+  y
+);
+
+y += 6;
+
+pdf.text(
+  "• Labour and service fees are non-refundable after completion.",
+  20,
+  y
+);
+
+y += 6;
+
+pdf.text(
+  "• Equipment remains subject to manufacturer warranty terms.",
+  20,
+  y
+);
+
+y += 15;
 pdf.text("Thank you for your business.", 20, y);
 pdf.addImage(logo, "PNG", 20, 10, 25, 25);
 
